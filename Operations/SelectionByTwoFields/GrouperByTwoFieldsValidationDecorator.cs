@@ -26,7 +26,7 @@ namespace Operations.SelectionByTwoFields{
         private readonly IGrouperByTwoFields _grouperByTwoFields;
         public GrouperByTwoFieldsValidationDecorator(IGrouperByTwoFields grouperByTwoFields){
             if (grouperByTwoFields == null){
-                throw new ArgumentException("The decorated object cannot be null.");
+                throw new ArgumentNullException("The decorated object cannot be null.");
             }
             if (grouperByTwoFields is GrouperByTwoFieldsValidationDecorator){
                 throw new ArgumentException("The recursive decoration is detected.");

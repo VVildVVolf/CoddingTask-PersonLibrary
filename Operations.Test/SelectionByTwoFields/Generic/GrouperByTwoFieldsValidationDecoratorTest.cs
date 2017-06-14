@@ -120,7 +120,7 @@ namespace Operations.Test.SelectionByTwoFields.Generic{
         }
         [Fact]
         public void EmptyDecorated(){
-            Assert.Throws(typeof(ArgumentException), () => {new GrouperByTwoFieldsValidationDecorator(null);});
+            Assert.Throws(typeof(ArgumentNullException), () => {new GrouperByTwoFieldsValidationDecorator(null);});
         }
 
         public int Aggregation(IEnumerable<Person> people){

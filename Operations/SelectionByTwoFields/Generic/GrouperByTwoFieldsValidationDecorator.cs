@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using CommonEntities;
 
 namespace Operations.SelectionByTwoFields.Generic {
@@ -12,10 +14,11 @@ namespace Operations.SelectionByTwoFields.Generic {
         }
 
         private void Validate<TE, TA>(string fieldName1, string fieldName2, Func<IEnumerable<TE>, TA> aggregation){
-            if (!PersonSelectors.Selectors.Keys.Contains(fieldName1)){
+            var fields = typeof(TE).GetRuntimeProperties().Where(e => e.CanRead).Select(e => e.Name);
+            if (!fields.Contains(fieldName1)){
                 throw GrouperByTwoFieldsException.InvalidFieldName(typeof(TE), fieldName1);
             }
-            if (!PersonSelectors.Selectors.Keys.Contains(fieldName2)){
+            if (!fields.Contains(fieldName2)){
                 throw GrouperByTwoFieldsException.InvalidFieldName(typeof(TE), fieldName2);
             }
             if (fieldName1 == fieldName2){
@@ -26,7 +29,7 @@ namespace Operations.SelectionByTwoFields.Generic {
         private readonly IGrouperByTwoFields _grouperByTwoFields;
         public GrouperByTwoFieldsValidationDecorator(IGrouperByTwoFields grouperByTwoFields){
             if (grouperByTwoFields == null){
-                throw new ArgumentException("The decorated object cannot be null.");
+                throw new ArgumentNullException("The decorated object cannot be null.");
             }
             if (grouperByTwoFields is GrouperByTwoFieldsValidationDecorator){
                 throw new ArgumentException("The recursive decoration is detected.");
