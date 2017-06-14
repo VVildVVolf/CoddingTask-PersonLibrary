@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Pair = System.Tuple<string, int>;
 using AggregatedResults = System.Collections.Generic.IDictionary<System.Tuple<string, int>, double>;
 
-namespace Operations.SelectionByCountryAndAge.Printing {
-    class PrinterToConsole : IPrinter
+namespace Operations.SelectionByCountryAndAge.Average.Printing {
+    public class PrinterToConsole : IPrinter
     {
         public void Print(AggregatedResults aggregatedResults)
         {
@@ -13,7 +13,7 @@ namespace Operations.SelectionByCountryAndAge.Printing {
             var ages = GetValues(pairs, p => p.Item2);
 
             PrintLine();
-            string[] strings = new string[ages.Count];
+            string[] strings = new string[ages.Count + 1];
             strings[0] = "Average";
             var i = 1;
             foreach(var iAge in ages){
