@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 
 namespace Operations.Aggregation{
     //It is just the POCO, there is nothing to test.
